@@ -1,0 +1,5 @@
+---
+- hosts: dit3
+  tasks:
+  - name: test connection
+    ping:
