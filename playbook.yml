@@ -1,0 +1,39 @@
+---
+- hosts: dit
+  remote_user: root
+  sudo: yes
+  tasks:
+  - name: test connection
+    ping:
+#  - name: change path
+#    command: PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/dist/bin
+  - name: path
+    command: echo $PATH
+    register: path
+  - debug: msg="{{ path.stdout }}"
+  - name: mount
+    command: /bin/mount -o remount,rw /usr
+  - name: install package
+    apt: name=cowsay state=absent
+    environment:
+      PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/dist/bin
+  - name: unmount
+    command: /bin/mount -o remount,ro /usr 
+#  - name: checksum
+#    command: /usr/bin/md5sum /etc/sudoers
+#    register: md5
+#  - debug: msg="{{ md5.stdout }}"
+#
+#  - name: diff
+#    script: /etc/ansible/scriptdiff.sh
+#    ignore_errors: yes
+#
+#    failed_when: "'FAILED' in command_result.stderr"
+#    shell: /usr/bin/diff /tmp/prueba_patch /tmp/index.html.patch -u > /tmp/patchdiff.txt
+#  - name: copy
+#    action: copy src=/tmp/index.html.patch dest=/tmp/prueba_patch
+#
+#  - name: apply patch to one file
+#    patch: 
+#     src=/tmp/diff.txt
+#     dest=/tmp/prueba_patch
