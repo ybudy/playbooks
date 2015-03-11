@@ -14,7 +14,7 @@
   - name: mount
     command: /bin/mount -o remount,rw /usr
   - name: install package
-    apt: name=cowsay state=absent
+    apt: name=cowsay state=present
     environment:
       PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/dist/bin
   - name: unmount
