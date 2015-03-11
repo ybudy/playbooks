@@ -1,7 +1,5 @@
 ---
- - hosts:
-#  remote_user: root
-#  sudo: yes
+- hosts:
   tasks:
   - name: test connection
     ping:
