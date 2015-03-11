@@ -1,8 +1,8 @@
 ---
-#- hosts: dit
+ - hosts:
 #  remote_user: root
 #  sudo: yes
-#tasks:
+  tasks:
   - name: test connection
     ping:
 #  - name: change path
